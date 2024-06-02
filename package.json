@@ -1,0 +1,24 @@
+{
+  "name": "yolo_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pw:run": "playwright test",
+    "pw:open": "playwright test --ui",
+    "performance-test": "artillery run artillery/test-config.yml"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.44.1",
+    "@types/node": "^20.12.12",
+    "artillery": "^2.0.14",
+    "artillery-plugin-expect": "^2.8.0",
+    "msw": "^2.3.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

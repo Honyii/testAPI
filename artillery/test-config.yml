@@ -1,0 +1,51 @@
+config:
+  target: 'https://8f0ab13a-9c6e-4ec3-b6c5-5bc3ee1535e2.mock.pstmn.io'
+  phases:
+    - duration: 60
+      arrivalRate: 20
+      name: "Load Test"
+    - duration: 10
+      arrivalRate: 50
+      name: "Spike Test"
+    - duration: 120
+      arrivalRate: 20
+      name: "Stress Test Phase 1"
+    - duration: 120
+      arrivalRate: 50
+      name: "Stress Test Phase 2"
+    - duration: 120
+      arrivalRate: 100
+      name: "Stress Test Phase 3"
+    - duration: 1800
+      arrivalRate: 10
+      name: "Soak Test"
+scenarios:
+  - name: "API Testing Scenario"
+    flow:
+      - post:
+          url: '/create_user'
+          json:
+            username: '{{ randomString 10  }}'
+            password: '{{ randomString 10  }}'
+      - post:
+          url: '/deposit'
+          json:
+            username: '{{ randomString 10  }}'
+            accountId: '{{ randomString 10  }}'
+            amount: 100.00
+            currency: 'USD'
+      - post:
+          url: '/withdraw'
+          json:
+            accountId: '{{ randomString 10  }}'
+            amount: 50.00
+            currency: 'USD'
+      - get:
+          url: '/balance/{{ randomString 10  }}'
+      - post:
+          url: '/send'
+          json:
+            senderAccountId: '{{ randomString 10  }}'
+            recipientAccountId: '{{ randomString 10  }}'
+            amount: 25.00
+            currency: 'USD'
